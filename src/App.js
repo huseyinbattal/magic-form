@@ -37,25 +37,43 @@ function App() {
           }) => (
             <form>
               <h3>Sign Up</h3>
-              <label htmlFor="name">Name:</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter your name..."
-                className="input"
-                value={values.name}
-                onChange={handleChange}
-              />
+              <div>
+                <label htmlFor="name">Name:</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name..."
+                  className="input"
+                  value={values.name}
+                  onChange={handleChange}
+                />
+              </div>
 
-              <label htmlFor="email">E-mail:</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter your e-mail..."
-                className="input"
-                value={values.email}
-                onChange={handleChange}
-              />
+              <div className="topMargin">
+                <label htmlFor="email">E-mail:</label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your e-mail..."
+                  className="input"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="topMargin">
+                <label htmlFor="favoriteColor">Favorite Color</label>
+                <select
+                  id="favoriteColor"
+                  value={values.favoriteColor}
+                  onChange={handleChange}
+                  style={{
+                    
+                  }}
+                >
+
+                </select>
+              </div>
             </form>
           )}
         </Formik>
