@@ -2,7 +2,7 @@
 
 git clone https://github.com/huseyinbattal/magic-form
 
-cd magic-form
+cd magic-form/
 
 npm install
 
