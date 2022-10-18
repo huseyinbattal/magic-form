@@ -7,13 +7,18 @@ function App() {
   const [show, setShow] = useState(false);
   const [load, setLoad] = useState(false);
   const [text, setText] = useState("");
+  const [color, setColor] = useState("");
 
 
   const formSuccess = () => {
-    return <div className="success-form">
-      <h2>Login Successful!</h2>
-      <h4>Welcome <span className="text">{text }</span></h4>
-    </div>;
+    return (
+      <div className="success-form">
+        <h2>Login Successful!</h2>
+        <h4>
+          Welcome <span style={{color:`${color}`}} className="text">{text}</span>
+        </h4>
+      </div>
+    );
   };
   return (
     <div className="container">
@@ -34,15 +39,17 @@ function App() {
             }}
             validationSchema={Yup.object({
               name: Yup.string().required("Name is required!"),
-              email: Yup.string().email().required("E-mail is required!"),
-              agree: Yup.boolean().required("You must accept the terms."),
+              email: Yup.string()
+                .email("Invalid")
+                .required("E-mail is required!"),
+              agree: Yup.boolean().required("You must accept the terms.").isTrue("You must accept the terms."),
               favoriteColor: Yup.string()
                 .required("Choose your favorite color!")
                 .oneOf(["red", "blue", "green"]),
             })}
             onSubmit={(values, { setSubmitting, resetForm }) => {
               console.log(values);
-              setLoad(true)
+              setLoad(true);
               setTimeout(() => {
                 setSubmitting(false);
                 resetForm();
@@ -64,18 +71,15 @@ function App() {
                 <h3>Sign Up</h3>
                 <div>
                   <label htmlFor="name">Name:</label>
-                    <input
-                 
+                  <input
                     id="name"
                     type="text"
                     placeholder="Hüseyin Battal"
                     className="input"
                     value={values.name}
-                      onChange={(e) => {
-                        handleChange(e)
-setText(e.target.value)
-                      
-                    
+                    onChange={(e) => {
+                      handleChange(e);
+                      setText(e.target.value);
                     }}
                   />
                   {errors.name && touched.name && (
@@ -103,7 +107,10 @@ setText(e.target.value)
                   <select
                     id="favoriteColor"
                     value={values.favoriteColor}
-                    onChange={handleChange}
+                      onChange={(e) => {
+                        handleChange(e)
+                        setColor(e.target.value)
+                    }}
                     style={{
                       marginTop: "10px",
                       padding: "5px",
@@ -114,7 +121,7 @@ setText(e.target.value)
                     }}
                   >
                     <option value="" label="Choose a color" />
-                    <option value="red" label="Red" />
+                    <option  value="red" label="Red" />
                     <option value="blue" label="Blue" />
                     <option value="green" label="Green" />
                   </select>
@@ -125,12 +132,15 @@ setText(e.target.value)
                     <input
                       id="agree"
                       type="checkbox"
-                      value={values.agree}
+                      checked={values.agree}
                       onChange={handleChange}
                     />
-                    <label className="checkbox-label " htmlFor="agree">
-                    I accepted the terms
+                    <label className="checkbox-label" htmlFor="agree">
+                      I accepted the terms
                     </label>
+                    {errors.agree && touched.agree && (
+                      <div className="input-feedback">{errors.agree}</div>
+                    )}
                   </div>
                 </div>
 

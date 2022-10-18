@@ -72,11 +72,7 @@ input:focus {
   font-family: cursive;
 }
 
-.checkbox {
-  display: flex;
-  align-items: center;
-  height: auto;
-}
+
 
 .checkbox-label {
   display: inline;
